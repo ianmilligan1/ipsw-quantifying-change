@@ -50,6 +50,30 @@ where $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, 
 \item Run test cases.
 \item Look at the variability in change over time. What is the distribution?
 \item Compare measures for looking at the difference between URLS and text.
+\end{itemize} 
+
+\section{Metrics}
+\subsection{Byte-wise comparison metric}
+Compares two webpages sequentially character by character. The metric returns 0 when no change and 1 otherwise. It returns 1 for even trivial cases, for example, blank space -- over-sensitive.
+
+\subsection{TF.IDF cosine distance}
+Comparing the number of times key words appear in the document.
+
+\subsection{Word distance}
+Percentage of words that have stayed the same.
+
+\subsection{Edit distance}
+Number of edits that are required to transform one sentence into another.
+
+\subsection{Shingling metric}
+Breaks up the webpage into subsequences called ``shingles'' that contain $k$ words.
+
+\subsection{Issues}
+\begin{itemize}
+	\item Byte-wise is over-sensitive,
+	\item TF.IDF and Word Distance cannot take into account change in word order,
+	\item Shingling is over-sensitive to small webpages,
+	
 \end{itemize}
 
 \begin{thebibliography}{9}
