@@ -1,0 +1,77 @@
+% Modelo de slides para projetos de disciplinas do Abel
+\documentclass[10pt]{beamer}
+
+\usetheme[progressbar=frametitle]{metropolis}
+\usepackage{appendixnumberbeamer}
+\usepackage[numbers,sort&compress]{natbib}
+\bibliographystyle{plainnat}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\title{IPSW - Modelling Change of Website Archives}
+\subtitle{Group 4}
+\date{\today}
+%\date{}
+\author{Authors}
+%\institute{UFPR - Disciplina - Semestre}
+% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Table of contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}[fragile]{The goal}
+
+\begin{itemize}
+	\item Construct and compare different metrics to quantify domain changes over time,
+	\item Determine a single quantitative measure to describe magnitude of the change in the domain since the previous time-step.
+	\end{itemize} 
+\begin{align}
+	\begin{split}
+		\sigma(t) &= (\text{change in links})w_1 + (\text{change in text})w_2 \\
+		&\qquad\qquad+ (\text{change in content management server})w_3,
+	\end{split}
+\end{align}
+where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes.
+\end{frame}
+
+\begin{frame}{Current methods}
+ 
+\begin{itemize}
+	\item Meaningful changes determined by comparing thumbnails manually. 
+	\vspace{3ex}
+	\item Could automate this by using image analysis to quantify the difference between website thumbnails at two time points. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Game plan}
+\begin{itemize}
+\item Run code to compare text.
+\item Do image analysis on thumbnails.
+\item Take link data and compare lists at different times:
+\begin{itemize}
+\item Internal vs. external links.
+\item Obtain $a$, $b$, and $c$. 
+\item What is the best timestep?
+\end{itemize}
+\item Determine whether the content management server (CMS) has changed.
+\item Look at different weightings - how best to choose these? We don't want to double-count changes.
+\item Run test cases.
+\item Look at the variability in change over time. What is the distribution?
+\item Compare measures for looking at the difference between URLS and text.
+\end{itemize}
+
+\end{frame}
+
+\end{document}
