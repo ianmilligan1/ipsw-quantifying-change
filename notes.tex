@@ -27,15 +27,13 @@
 \maketitle
 
 \section{Introduction}
+One method to check whether meaningful changes have occurred to a domain is to compare homepage thumbnails at two different time points. This is often done manually, although automated image analysis approaches have also been investigated. This method may not always produce meaningful results -- e.g., moving a single image from a homepage may modify the appearance dramatically without a change in content. Therefore, it is important to also investigate alternative metrics. A summary of different approaches is provided in \cite{diff_metrics}. {\color{red} Ian could you add in a lit review?}
 
-The goal is to construct and compare different metrics to quantify domain changes over time.  We aim to determine a single quantitative measure at each time that encapsulates the changes the magnitude of the change in the domain since the previous time-step. Currently, to check whether meaningful changes have occurred, the thumbnails are compared manually. One approach would be to automate this, by using image analysis to quantify the difference between website thumbnails at two time points. However, this may not always produce meaningful 
-
-
+Our goal is to investigate a novel metric for domain change, focussing on changes in \textit{links}, pointing either to internal webpages or to external domains. We propose that the  magnitude  of the change in the domain at time-step $n$ from time-step $n-1$ is
 \begin{equation}
-\sigma(t) = (\text{change in links})w_1 + (\text{change in text})w_2 + (\text{change in content management server})w_3,
+\sigma(n) = (\text{change in links})w_1 + (\text{change in text})w_2 + (\text{change in content management server})w_3,
 \end{equation}
-where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes.
-
+where $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes, respectively.
 
 \section{Game plan}
 \begin{itemize}
@@ -44,7 +42,7 @@ where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions
 \item Take link data and compare lists at different times:
 \begin{itemize}
 \item Internal vs. external links.
-\item Obtain $a$, $b$, and $c$. 
+\item Obtain number of links added, links removed, and links changed.
 \item What is the best timestep?
 \end{itemize}
 \item Determine whether the content management server (CMS) has changed.
@@ -54,6 +52,11 @@ where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions
 \item Compare measures for looking at the difference between URLS and text.
 \end{itemize}
 
-
+\begin{thebibliography}{9}
+\bibitem{diff_metrics} 
+Shin Young Kwon, Sang Ho Lee, Sung Jin Kim. 
+\textit{A Precise Metric for Measuring How Much Web Pages Change}. 
+School of Computing, Soongsil University.
+\end{thebibliography}
 
 \end{document}
