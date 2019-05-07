@@ -10,3 +10,7 @@ This is a repository for a web archiving problem explored at the [Fields-CQAM In
 2. Domain
 3. URL 
 4. Text
+
+## URL for 3.5GB NDP Text File
+
+<http://ruebot.net/227-www-ndp-ca.txt>
