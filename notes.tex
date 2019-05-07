@@ -16,6 +16,8 @@
 \usetikzlibrary{decorations.pathreplacing}
 \usetikzlibrary{arrows}
 \usetikzlibrary{fadings}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
 
 \begin{document}
 
@@ -24,10 +26,32 @@
 \date{\vspace{-5ex}}
 \maketitle
 
-Ideas so far:
+\section{Introduction}
 
+The goal is to construct and compare different metrics to quantify domain changes over time.  We aim to determine a single quantitative measure at each time that encapsulates the changes the magnitude of the change in the domain since the previous time-step. Currently, to check whether meaningful changes have occurred, the thumbnails are compared manually. One approach would be to automate this, by using image analysis to quantify the difference between website thumbnails at two time points. However, this may not always produce meaningful 
+
+
+\begin{equation}
+\sigma(t) = (\text{change in links})w_1 + (\text{change in text})w_2 + (\text{change in content management server})w_3,
+\end{equation}
+where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes.
+
+
+\section{Game plan}
 \begin{itemize}
-\item 
+\item Run code to compare text.
+\item Do image analysis on thumbnails.
+\item Take link data and compare lists at different times:
+\begin{itemize}
+\item Internal vs. external links.
+\item Obtain $a$, $b$, and $c$. 
+\item What is the best timestep?
+\end{itemize}
+\item Determine whether the content management server (CMS) has changed.
+\item Look at different weightings - how best to choose these? We don't want to double-count changes.
+\item Run test cases.
+\item Look at the variability in change over time. What is the distribution?
+\item Compare measures for looking at the difference between URLS and text.
 \end{itemize}
 
 
