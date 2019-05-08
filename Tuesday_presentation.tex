@@ -74,4 +74,36 @@ where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions
 
 \end{frame}
 
+\begin{frame}
+
+\begin{itemize}
+\item Trying to quantify change using text, thumbnails and links.
+\item Lots of metrics about the how the text differs and some of these are similar.
+\begin{itemize}
+\item There is one that is overly sensitive but there is still one timestamp that says there is absolutely no change and so could still be useful.
+\end{itemize}  
+\item Thumbnails obtained using the wayback archive which renders the homepage and takes a screenshot.
+\begin{itemize}
+\item We've used a metric that looks at structural similarity instead of just pixel to pixel which is good. 
+\item We've had a problem with the website not always rendering and giving us just a white page which obviously causes a huge change. This needs to be accounted for tomorrow.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item The link data has been analysed
+\item \begin{itemize}
+\item Unfortunately the dates for these data is shorter than the text data frame so it is difficult to get a good comparison. 
+\item We have Ian, the history professor on this task.
+\end{itemize}
+\item Graphs of links
+\begin{itemize}
+\item One last thing we were thinking of doing is getting the internal links within a whole domain instead of just the homepages, seeing how the structure of the graph of links between them changes.
+\item This is more of a structural change than a content change, which could be useful for rapidly updating websites such as news websites and blogs whose words change rapidly but fairly meaninglessly.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
 \end{document}
