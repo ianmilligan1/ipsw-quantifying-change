@@ -38,6 +38,8 @@ The collection number for this collection is `5421`, you will need to change tha
 
 All links (internal) from the event homepage: <https://github.com/ianmilligan1/ipsw-quantifying-change/blob/master/panam-all-links.txt>
 
+Same, using HTTPS: <https://github.com/ianmilligan1/ipsw-quantifying-change/blob/master/panam-all-links-https.txt>
+
 All text: <https://ruebot.net/5421-www-toronto2015-org.txt>
 
 # Important NDP Dates
