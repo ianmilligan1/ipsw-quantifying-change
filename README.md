@@ -40,6 +40,19 @@ All links (internal) from the event homepage: <https://github.com/ianmilligan1/i
 
 All text: <https://ruebot.net/5421-www-toronto2015-org.txt>
 
+# Important NDP Dates
+
+- 28 November 2005: election called.
+- 23 January 2006: federal election.
+- 14 October 2008: federal election.
+- 2 May 2011: federal election.
+- July 2011: NDP leader announces leave of absence; replaced by interim.
+- 22 August 2011: NDP leader dies.
+- 24 March 2012: New NDP leader selected.
+- 19 October 2015: federal election.
+- 10 April 2016: NDP leader loses vote of confidence.
+- 1 October 2017: New NDP leader selected.
+
 # Scripts (for reproducibility)
 
 ## Scripts used to generate the files
