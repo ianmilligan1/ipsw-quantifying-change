@@ -11,9 +11,35 @@ This is a repository for a web archiving problem explored at the [Fields-CQAM In
 3. URL 
 4. Text
 
+# Collections
+
+## Wayback Machine URL vs Archive-It Wayback Machine URL
+
+Archive-It Wayback Machine URL prefix is `https://wayback.archive-it.org/227/` (where `227` refers to the collection ID - in this case, political party websites).
+
+For *example*, <https://wayback.archive-it.org/227/20140805/http://www.ndp.ca/>.
+
+Internet Archive Wayback Machine URL prefix is 
+
+`https://web.archive.org/web/`
+
+For *example*, <https://web.archive.org/web/20140410/http://www.ndp.ca/>
+
 ## URL for 3.5GB NDP Text File
 
 <http://ruebot.net/227-www-ndp-ca.txt>
+
+## Crawl Dates in the NDP Subset
+
+<https://github.com/ianmilligan1/ipsw-quantifying-change/blob/master/NDP-dates.txt>
+
+## Data from the Toronto PanAm Collection 
+The collection number for this collection is `5421`, you will need to change that from `227` (which is the Political Party collection number) when looking at Wayback crawls, etc.
+
+All links (internal) from the event homepage: <https://github.com/ianmilligan1/ipsw-quantifying-change/blob/master/panam-all-links.txt>
+All text: <https://ruebot.net/5421-www-toronto2015-org.txt>
+
+# Scripts (for reproducibility)
 
 ## Scripts used to generate the files
 
