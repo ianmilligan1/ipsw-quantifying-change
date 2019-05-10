@@ -8,6 +8,7 @@
 \bibliographystyle{plainnat}
 
 \usepackage{booktabs}
+\usepackage{epstopdf,subfigure}
 \usepackage[scale=2]{ccicons}
 
 \usepackage{xspace}
@@ -241,6 +242,52 @@ where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions
 \end{itemize}
 \end{itemize}
 
+\end{frame}
+
+\begin{frame}{Image comparison results}
+  \begin{figure}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{image_comparison}
+    \caption{Red lines where new NDP leader selected.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Link comparison results}
+  \begin{figure}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{link_comparison}
+    \caption{Red lines where new NDP leader selected.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Text comparison results}
+  \begin{figure}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{text_comparison}
+    \caption{Red lines where new NDP leader selected.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Conclusions}
+\begin{figure}
+\centering     %%% not \center
+\subfigure[Image comparison]{\label{fig:a}\includegraphics[width=52mm]{image_comparison}}
+\subfigure[Text comparison]{\label{fig:b}\includegraphics[width=52mm]{text_comparison}}
+\caption{Locations of high change correspond to new NDP leader selected.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Conclusions}
+\begin{itemize}
+\item Different metrics are useful for different websites or for different types of change,
+\begin{itemize}
+\item e.g. news websites update content every day but this might not indicate significant change -- structural metric more informative than text metric,
+\item e.g. governmental websites depend sensitively on text and content -- text metric most informative,
+\item e.g. job registers will link to new advertisements -- link data most informative.
+\end{itemize}
+\vspace{2ex}
+\item We see that the text, link and thumbnail metrics align for certain substantial changes.
+\end{itemize}
 \end{frame}
 
 \end{document}
