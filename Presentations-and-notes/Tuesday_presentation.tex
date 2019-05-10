@@ -30,7 +30,7 @@
  % \tableofcontents[hideallsubsections]
 %\end{frame}
 
-\section{The Problem}
+%\section{The Problem}
 
 \begin{frame}{The Problem}
 
@@ -89,10 +89,10 @@ Can we
 \Large
 \begin{itemize}
 \itemsep1.0em
-\item How much words on the domain change
-\item How the links out of the domain change
-\item How the way the domain looks changes
-\item How the structure of the websites within the domain change
+\item How many words on the domain change?
+\item How do the links out of the domain change?
+\item How does the way the website looks changes?
+\item How does the structure of the websites within the domain change?
 \end{itemize}
 \end{frame}
 
@@ -149,7 +149,7 @@ Can we
 \end{itemize}
 \item Method
 \begin{itemize}
-\item Compare vector of links on homepage at $t_i$ and $t_{i+1}$ as $\textbf{v}_i$ and $\textbf{v}_{i+1}$
+\large\item Compare vector of links on homepage at $t_i$ and $t_{i+1}$ as $\textbf{v}_i$ and $\textbf{v}_{i+1}$
 \end{itemize}
 \end{itemize}
 
@@ -166,81 +166,109 @@ Can we
 \includegraphics[scale=0.06]{../homepage-images-ndp/52-ndp}
 \includegraphics[scale=0.06]{../homepage-images-ndp/53-ndp}
 \end{figure}
+
+\footnotesize{Sampat \textit{et al.} Complex Wavelet Structural Similarity: A New Image Similarity Index}
 \end{frame}
 
-\begin{frame}[fragile]{The goal}
+\begin{frame}{Structure}
+\vspace{20mm}
+\begin{figure}
+\centering
+\includegraphics[scale=0.3]{GRAPH-Matching2}
+\end{figure}
 
-\begin{itemize}
-	\item Construct and compare different metrics to quantify domain changes over time,
-	\item Determine a single quantitative measure to describe magnitude of the change in the domain since the previous time-step.
-	\end{itemize} 
-\begin{align}
-	\begin{split}
-		\sigma(t) &= (\text{change in links})w_1 + (\text{change in text})w_2 \\
-		&\qquad\qquad+ (\text{change in content management server})w_3,
-	\end{split}
-\end{align}
-where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes.
+\vspace{20mm}
+
+\footnotesize https://www.geeksforgeeks.org/mathematics-matching-graph-theory/
 \end{frame}
 
-\begin{frame}{Current methods}
- 
+\begin{frame}{Issues}
+\large
 \begin{itemize}
-	\item Meaningful changes determined by comparing thumbnails manually. 
-	\vspace{3ex}
-	\item Could automate this by using image analysis to quantify the difference between website thumbnails at two time points. 
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Game plan}
-\begin{itemize}
-\item Run code to compare text.
-\item Do image analysis on thumbnails.
-\item Take link data and compare lists at different times:
-\begin{itemize}
-\item Internal vs. external links.
-\item Obtain $a$, $b$, and $c$. 
-\item What is the best timestep?
-\end{itemize}
-\item Determine whether the content management server (CMS) has changed.
-\item Look at different weightings - how best to choose these? We don't want to double-count changes.
-\item Run test cases.
-\item Look at the variability in change over time. What is the distribution?
-\item Compare measures for looking at the difference between URLS and text.
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}
-
-\begin{itemize}
-\item Trying to quantify change using text, thumbnails and links.
-\item Lots of metrics about the how the text differs and some of these are similar.
-\begin{itemize}
-\item There is one that is overly sensitive but there is still one timestamp that says there is absolutely no change and so could still be useful.
-\end{itemize}  
-\item Thumbnails obtained using the wayback archive which renders the homepage and takes a screenshot.
-\begin{itemize}
-\item We've used a metric that looks at structural similarity instead of just pixel to pixel which is good. 
-\item We've had a problem with the website not always rendering and giving us just a white page which obviously causes a huge change. This needs to be accounted for tomorrow.
-\end{itemize}
+\itemsep1.0em
+\item Data takes a long time to retrieve from servers
+\item Different languages
+\item Failed renderings
+\item Difficult to decipher where website fits in structure just from URL
+\item Internal links data showing strange behaviour
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\begin{itemize}
-\item The link data has been analysed
-\item \begin{itemize}
-\item Unfortunately the dates for these data is shorter than the text data frame so it is difficult to get a good comparison. 
-\item We have Ian, the history professor on this task.
-\end{itemize}
-\item Graphs of links
-\begin{itemize}
-\item One last thing we were thinking of doing is getting the internal links within a whole domain instead of just the homepages, seeing how the structure of the graph of links between them changes.
-\item This is more of a structural change than a content change, which could be useful for rapidly updating websites such as news websites and blogs whose words change rapidly but fairly meaninglessly.
-\end{itemize}
-\end{itemize}
 
-\end{frame}
+
+%\begin{frame}[fragile]{The goal}
+%
+%\begin{itemize}
+%	\item Construct and compare different metrics to quantify domain changes over time,
+%	\item Determine a single quantitative measure to describe magnitude of the change in the domain since the previous time-step.
+%	\end{itemize} 
+%\begin{align}
+%	\begin{split}
+%		\sigma(t) &= (\text{change in links})w_1 + (\text{change in text})w_2 \\
+%		&\qquad\qquad+ (\text{change in content management server})w_3,
+%	\end{split}
+%\end{align}
+%where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes.
+%\end{frame}
+%
+%\begin{frame}{Current methods}
+% 
+%\begin{itemize}
+%	\item Meaningful changes determined by comparing thumbnails manually. 
+%	\vspace{3ex}
+%	\item Could automate this by using image analysis to quantify the difference between website thumbnails at two time points. 
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Game plan}
+%\begin{itemize}
+%\item Run code to compare text.
+%\item Do image analysis on thumbnails.
+%\item Take link data and compare lists at different times:
+%\begin{itemize}
+%\item Internal vs. external links.
+%\item Obtain $a$, $b$, and $c$. 
+%\item What is the best timestep?
+%\end{itemize}
+%\item Determine whether the content management server (CMS) has changed.
+%\item Look at different weightings - how best to choose these? We don't want to double-count changes.
+%\item Run test cases.
+%\item Look at the variability in change over time. What is the distribution?
+%\item Compare measures for looking at the difference between URLS and text.
+%\end{itemize}
+%
+%\end{frame}
+%
+%\begin{frame}
+%
+%\begin{itemize}
+%\item Trying to quantify change using text, thumbnails and links.
+%\item Lots of metrics about the how the text differs and some of these are similar.
+%\begin{itemize}
+%\item There is one that is overly sensitive but there is still one timestamp that says there is absolutely no change and so could still be useful.
+%\end{itemize}  
+%\item Thumbnails obtained using the wayback archive which renders the homepage and takes a screenshot.
+%\begin{itemize}
+%\item We've used a metric that looks at structural similarity instead of just pixel to pixel which is good. 
+%\item We've had a problem with the website not always rendering and giving us just a white page which obviously causes a huge change. This needs to be accounted for tomorrow.
+%\end{itemize}
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\begin{itemize}
+%\item The link data has been analysed
+%\item \begin{itemize}
+%\item Unfortunately the dates for these data is shorter than the text data frame so it is difficult to get a good comparison. 
+%\item We have Ian, the history professor on this task.
+%\end{itemize}
+%\item Graphs of links
+%\begin{itemize}
+%\item One last thing we were thinking of doing is getting the internal links within a whole domain instead of just the homepages, seeing how the structure of the graph of links between them changes.
+%\item This is more of a structural change than a content change, which could be useful for rapidly updating websites such as news websites and blogs whose words change rapidly but fairly meaninglessly.
+%\end{itemize}
+%\end{itemize}
+%
+%\end{frame}
 
 \end{document}
