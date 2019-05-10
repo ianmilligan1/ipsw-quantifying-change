@@ -96,18 +96,76 @@ Can we
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Words}
-
-\LARGE Four metrics:
+\begin{frame}{Four Metrics for Text}
+%\vspace{-4mm}
+%\LARGE Four metrics:\\
+%\vspace{2mm}
+\begin{minipage}{0.6\textwidth}
 \begin{itemize}
 \large\item Byte-wise comparison:
 \begin{itemize}
 \item If any change in characters has occurred, = 1
 \item If text is \textit{exactly} the same, = 0
 \end{itemize}
-\item TF$\cdot$IDF 
+\item TF$\cdot$IDF \\
+\begin{itemize}
+\item Calculates cosine distance between two different vectors of characters $\boldsymbol{p}$ and $\boldsymbol{p}'$
+\end{itemize}
+\item Word distance
+\begin{itemize}
+\item How many words have changed
+\end{itemize}
+\item Edit distance
+\begin{itemize}
+\item ``Edit distance'' $\delta$ is the amount of insertion/deletion/substitution needed to turn one sequence into the other
+\end{itemize}
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.38\textwidth}
+\Large
+\vspace{10mm}
+\begin{equation*}
+1-\frac{\boldsymbol{p}\cdot \boldsymbol{p}'}{||\boldsymbol{p}||_2||\boldsymbol{p}'||_2}
+\end{equation*}
+\vspace{5mm}
+\begin{equation*}
+1-\frac{2|common \text{ } words|}{m+n}
+\end{equation*}
+\vspace{1mm}
+\begin{equation*}
+\frac{\delta}{m + n}
+\end{equation*}
+\end{minipage}
+\end{frame}
+
+\begin{frame}{External Links}
+
+\Large
+\begin{itemize}
+\item Justification
+\begin{itemize}
+\large\item Links to other websites are important to the website designer
+\item If these change, the topic of the website has most likely changed as well
+\end{itemize}
+\item Method
+\begin{itemize}
+\item Compare vector of links on homepage at $t_i$ and $t_{i+1}$ as $\textbf{v}_i$ and $\textbf{v}_{i+1}$
+\end{itemize}
 \end{itemize}
 
+\begin{equation*}
+1 - \frac{2|common \text{ } links|}{|\textbf{v}_i| + |\textbf{v}_{i+1}|}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Screenshot Comparison}
+\begin{figure}
+\centering
+\includegraphics[scale=0.25]{SSIM}\\
+\includegraphics[scale=0.06]{../homepage-images-ndp/52-ndp}
+\includegraphics[scale=0.06]{../homepage-images-ndp/53-ndp}
+\end{figure}
 \end{frame}
 
 \begin{frame}[fragile]{The goal}
