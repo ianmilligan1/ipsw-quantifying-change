@@ -6,6 +6,8 @@
 \usepackage{appendixnumberbeamer}
 \usepackage[numbers,sort&compress]{natbib}
 \bibliographystyle{plainnat}
+\usepackage{epstopdf}
+\usepackage{subfigure}
 
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
@@ -159,7 +161,7 @@ Can we
 
 \end{frame}
 
-\begin{frame}{Screenshot Comparison}
+\begin{frame}{Image Comparison}
 \begin{figure}
 \centering
 \includegraphics[scale=0.25]{SSIM}\\
@@ -194,6 +196,74 @@ Can we
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Text comparison results}
+  \begin{figure}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{text_comparison}
+    \caption{Red lines where new NDP leader selected.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Link comparison results}
+  \begin{figure}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{link_comparison}
+    \caption{Red lines where new NDP leader selected.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Image comparison results}
+  \begin{figure}
+    \centering
+    \includegraphics[width = 0.8\textwidth]{image_comparison}
+    \caption{Red lines where new NDP leader selected.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Conclusions}
+\begin{figure}
+\centering     %%% not \center
+\subfigure[Image comparison]{\includegraphics[width=52mm]{image_comparison}}
+\subfigure[Text comparison]{\includegraphics[width=52mm]{text_comparison}}
+\caption{Locations of high change correspond to new NDP leader selected.}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Conclusions}
+\begin{itemize}
+\item Different metrics are useful for different websites or for different types of change,
+\begin{itemize}
+\item e.g. news websites update content every day but this might not indicate significant change -- structural metric more informative than text metric,
+\item e.g. governmental websites depend sensitively on text and content -- text metric most informative,
+\item e.g. job registers will link to new advertisements -- link data most informative.
+\end{itemize}
+\vspace{2ex}
+\item We see that the text and screenshot metrics align for certain substantial changes.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Moving Forward}
+\large
+\begin{itemize}
+\item Use more datasets to find which metrics are useful for which kind of websites
+\item Use more sophisticated language detection techniques to convey context (machine learning...)
+\item Computer science knowledge needed to understand greater indicators of substantial changes
+\item Full internal link data could be used to see website structure changes
+\item Distribution of the change could be used to predict when next crawl should be made (next study group?!)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+\LARGE \centering QUESTIONS?
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.07]{the_team.pdf}
+\end{figure}
+
+\end{frame}
 
 
 %\begin{frame}[fragile]{The goal}
