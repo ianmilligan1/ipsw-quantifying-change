@@ -96,40 +96,17 @@ Can we
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Four Metrics}
-%\vspace{-4mm}
-%\LARGE Four metrics:\\
-%\vspace{2mm}
-\begin{minipage}{0.6\textwidth}
+\begin{frame}{Words}
+
+\LARGE Four metrics:
 \begin{itemize}
 \large\item Byte-wise comparison:
 \begin{itemize}
 \item If any change in characters has occurred, = 1
 \item If text is \textit{exactly} the same, = 0
 \end{itemize}
-\item TF$\cdot$IDF \\
-\begin{itemize}
-\item Calculates cosine distance between two different vectors of characters $\boldsymbol{p}$ and $\boldsymbol{p}'$
+\item TF$\cdot$IDF 
 \end{itemize}
-\item Word distance
-\begin{itemize}
-\item How many words have changed
-\end{itemize}
-\item Edit distance
-\begin{itemize}
-\item 
-\end{itemize}
-\end{itemize}
-\end{minipage}
-\begin{minipage}{0.38\textwidth}
-\Large
-\begin{equation*}
-1 - \frac{\boldsymbol{p}\cdot \boldsymbol{p}'}{||\boldsymbol{p}||_2||\boldsymbol{p}'||_2}
-\end{equation*}
-\begin{equation*}
-1 - \frac{2|common \text{ } words|}{m+n}
-\end{equation*}
-\end{minipage}
 
 \end{frame}
 
