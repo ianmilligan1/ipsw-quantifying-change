@@ -1,0 +1,86 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[version=4]{mhchem}
+\usepackage{rotating}
+\renewcommand{\baselinestretch}{1}
+\usepackage{fullpage}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{standalone}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows}
+\usetikzlibrary{fadings}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\title{IPSW - Modelling Change of Website Archives}
+\author{Group 4}
+\date{\vspace{-5ex}}
+\maketitle
+
+\section{Introduction}
+One method to check whether meaningful changes have occurred to a domain is to compare homepage thumbnails at two different time points. This is often done manually, although automated image analysis approaches have also been investigated. This method may not always produce meaningful results -- e.g., moving a single image from a homepage may modify the appearance dramatically without a change in content. Therefore, it is important to also investigate alternative metrics. A summary of different approaches is provided in \cite{diff_metrics}. {\color{red} Ian could you add in a lit review?}
+
+Our goal is to investigate a novel metric for domain change, focussing on changes in \textit{links}, pointing either to internal webpages or to external domains. We propose that the  magnitude  of the change in the domain at time-step $n$ from time-step $n-1$ is
+\begin{equation}
+\sigma(n) = (\text{change in links})w_1 + (\text{change in text})w_2 + (\text{change in content management server})w_3,
+\end{equation}
+where $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes, respectively.
+
+\section{Game plan}
+\begin{itemize}
+\item Run code to compare text.
+\item Do image analysis on thumbnails.
+\item Take link data and compare lists at different times:
+\begin{itemize}
+\item Internal vs. external links.
+\item Obtain number of links added, links removed, and links changed.
+\item What is the best timestep?
+\end{itemize}
+\item Determine whether the content management server (CMS) has changed.
+\item Look at different weightings - how best to choose these? We don't want to double-count changes.
+\item Run test cases.
+\item Look at the variability in change over time. What is the distribution?
+\item Compare measures for looking at the difference between URLS and text.
+\end{itemize} 
+
+\section{Metrics}
+\subsection{Byte-wise comparison metric}
+Compares two webpages sequentially character by character. The metric returns 0 when no change and 1 otherwise. It returns 1 for even trivial cases, for example, blank space -- over-sensitive.
+
+\subsection{TF.IDF cosine distance}
+Comparing the number of times key words appear in the document.
+
+\subsection{Word distance}
+Percentage of words that have stayed the same.
+
+\subsection{Edit distance}
+Number of edits that are required to transform one sentence into another.
+
+\subsection{Shingling metric}
+Breaks up the webpage into subsequences called ``shingles'' that contain $k$ words.
+
+\subsection{Issues}
+\begin{itemize}
+	\item Byte-wise is over-sensitive,
+	\item TF.IDF and Word Distance cannot take into account change in word order,
+	\item Shingling is over-sensitive to small webpages,
+	
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{diff_metrics} 
+Shin Young Kwon, Sang Ho Lee, Sung Jin Kim. 
+\textit{A Precise Metric for Measuring How Much Web Pages Change}. 
+School of Computing, Soongsil University.
+\end{thebibliography}
+
+\end{document}

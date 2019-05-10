@@ -1,0 +1,13 @@
+\frametitle{The goal}
+
+\begin{itemize}
+	\item Construct and compare different metrics to quantify domain changes over time,
+	\item Determine a single quantitative measure to describe magnitude of the change in the domain since the previous time-step.
+	\end{itemize}
+\begin{align}
+	\begin{split}
+		\sigma(t) &= (\text{change in links})w_1 + (\text{change in text})w_2 \\
+		&\qquad\qquad+ (\text{change in content management server})w_3,
+	\end{split}
+\end{align}
+where $t$ is time, and $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes.

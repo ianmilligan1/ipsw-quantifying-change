@@ -1,0 +1,1 @@
+[[281105, 'election called'], [230106, 'federal election'], [141008, 'federal election'], [020511, 'federal election'], [150711, 'NDP leader announces leave of absence; replaced by interim'], [220811, 'NDP leader dies'], [240312, 'New NDP leader selected'], [191015, 'federal election'], [100416, 'NDP leader loses vote of confidence'], [011017, 'New NDP leader selected']]
