@@ -17,6 +17,7 @@
 \usetikzlibrary{arrows}
 \usetikzlibrary{fadings}
 \usepackage{parskip}
+\usepackage{import}
 \setlength{\parindent}{0pt}
 
 
@@ -69,11 +70,22 @@ The Levenshtein distance between two strings is the minimum number of single cha
 
 We calculated the Levenshtein distance between the text of two webpages and normalised this value according to the maximum Levenshtein distance, namely the length of the longer string. 
 
-
-
-
 \section{Thumbnails}
-A promising method to check whether meaningful changes have occurred to a domain is to compare homepage thumbnails at two different time points. This is often done manually, although automated image analysis approaches have also been investigated. This method may not always produce meaningful results -- e.g., moving a single image from a homepage may modify the appearance dramatically without a change in content. Therefore, it is important to also investigate alternative metrics. A summary of different approaches is provided in \cite{kwon2006precise}. {\color{red} Ian could you add in a lit review?}
+
+In addition to changes in website text and structure, meaningful change in domain is often reflected by a change in the visual structure of the page. We can generate a website snapshot at a recorded point in time using the Wayback Machine (\texttt{www.archive.org/web}) which is a digital archive of the web. Hence, a promising approach to quantify the change in a web domain, is found in applying image analysis techniques to detect the similarity between domain thumbnails \cite{alsum2014thumbnail}. This has previously been considered for pairs of images, although plotting similarity over time has yet to be considered. Several methods for comparing thumbnails have been proposed and implemented previously \cite{henzinger,broder,manku}, and an accessible summary is provided in \cite{alsum2014thumbnail}. Some image comparison techniques may not always produce meaningful results -- e.g., images on a homepage may change frequently, with no change in website content.
+
+Therefore, we propose the use of the structural similarity index (SSIM) \cite{ssim}, which, broadly speaking, measures the similarity between two images by comparing average pixel intensity in various sub-windows of the page. The SSIM value is generally between $-1$ and $1$, with $1$ only achieved when two images are identical. In order to compare this metric directly with the differences calculated between text and website links, we scale the SSIM value to lie between $0$ and $1$, where $0$ indicates no change between a pair of images. We call this metric, $d$, a measure of difference between image thumbnails.
+
+\begin{figure}[h!]
+\centering
+\def\svgwidth{
+0.7\columnwidth}
+\import{report-images/}{all-waybacks.pdf_tex}
+  \caption{Three image comparisons from \texttt{www.ndp.ca}.}
+\label{fig::wayback_images}
+\end{figure}
+
+We wrote code in \texttt{python} to automatically generate thumbnails from a chosen web domain at all points recorded in the Wayback Machine, and used this to obtain a library of 108 thumbnails from \texttt{www.ndp.ca} from 2005-2019. There were times when the Wayback Archive had only saved a page that had failed to render, which presented itself as a primarily white webpage. We detected these `fails' and removed them from the data set, by imposing a maximum percentage of white pixels (80\%). In Figure \ref{fig::wayback_images}, we display an example of a failed render, as well as two different timesteps which demonstrate visually the value of the SSIM metric.
 
 \section{Links}
 

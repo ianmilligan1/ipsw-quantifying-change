@@ -1,0 +1,93 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[version=4]{mhchem}
+\usepackage{rotating}
+\renewcommand{\baselinestretch}{1}
+\usepackage{fullpage}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{standalone}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows}
+\usetikzlibrary{fadings}
+\usepackage{parskip}
+\usepackage{import}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\title{IPSW - Modelling Change of Website Archives}
+\author{Group 4}
+\date{\vspace{-5ex}}
+\maketitle
+
+\section{Introduction}
+
+\subsection{Goal}
+Our goal is to investigate a novel metric for domain change that focuses on three branches of indicators, namely, changes in webpage text, changes in the links extending from the webpage and change to the homepage thumbnails. We propose that the  magnitude  of the total change in the domain from time-step $n-1$ to time-step $n$ can be modelled as 
+\begin{equation}
+\sigma(n) = \left(1-\frac{\Delta\, \,\text{links}}{\Sigma\,\,\text{links}}\right)w_1 + (\text{change in text})w_2 + (\text{change in content management server})w_3,
+\end{equation}
+where $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes, respectively.
+
+\section{Obtaining the data}
+\subsection{Political party data}
+\subsection{Pan Am Games 2015}
+
+\section{Text}
+We obtain the text from the homepage at every point in time. Our goal is to compare the text from one time-point to the next and quantify how much the text has changed between these measurements. There are a variety of metrics within the literature, in particular we explore the metrics described by Kwon et~al.  \cite{kwon2006precise}.
+\subsection{Metrics}
+\subsubsection*{Byte-wise comparison metric}
+Compares two webpages sequentially character by character. The metric returns 0 when no change and 1 otherwise. It returns 1 for even trivial cases, for example, blank space -- over-sensitive.
+
+\subsubsection*{TF.IDF cosine distance}
+Comparing the number of times key words appear in the document.
+
+\subsubsection*{Word distance}
+Percentage of words that have stayed the same.
+
+\subsubsection*{Edit distance}
+Number of edits that are required to transform one sentence into another.
+
+\subsubsection*{Shingling metric}
+Breaks up the webpage into subsequences called ``shingles'' that contain $k$ words.
+
+\subsection{Issues}
+\begin{itemize}
+	\item Byte-wise is over-sensitive,
+	\item TF.IDF and Word Distance cannot take into account change in word order,
+	\item Shingling is over-sensitive to small webpages,
+	
+\end{itemize}
+
+
+\section{Thumbnails}
+In addition to changes in website text and structure, meaningful change in domain is often reflected by a change in the visual structure of the page. We can generate a website snapshot at a recorded point in time using the Wayback Machine (\texttt{www.archive.org/web}) which is a digital archive of the web. Hence, a promising approach to quantify the change in a web domain, is found in applying image analysis techniques to detect the similarity between domain thumbnails \cite{alsum2014thumbnail}. This has previously been considered for pairs of images, although plotting similarity over time has yet to be considered. Several methods for comparing thumbnails have been proposed and implemented previously \cite{henzinger,broder,manku}, and an accessible summary is provided in \cite{alsum2014thumbnail}. Some image comparison techniques may not always produce meaningful results -- e.g., images on a homepage may change frequently, with no change in website content.
+
+Therefore, we propose the use of the structural similarity index (SSIM) \cite{ssim}, which, broadly speaking, measures the similarity between two images by comparing average pixel intensity in various sub-windows of the page. The SSIM value is generally between $-1$ and $1$, with $1$ only achieved when two images are identical. In order to compare this metric directly with the differences calculated between text and website links, we scale the SSIM value to lie between $0$ and $1$, where $0$ indicates no change between a pair of images. We call this metric, $d$, a measure of difference between image thumbnails.
+
+\begin{figure}[h!]
+\centering
+\def\svgwidth{
+0.7\columnwidth}
+\import{report-images/}{all-waybacks.pdf_tex}
+  \caption{Three image comparisons from \texttt{www.ndp.ca}.}
+\label{fig::wayback_images}
+\end{figure}
+
+We wrote code in \texttt{python} to automatically generate thumbnails from a chosen web domain at all points recorded in the Wayback Machine, and used this to obtain a library of 108 thumbnails from \texttt{www.ndp.ca} from 2005-2019. There were times when the Wayback Archive had only saved a page that had failed to render, which presented itself as a primarily white webpage. We detected these `fails' and removed them from the data set, by imposing a maximum percentage of white pixels (80\%). In Figure \ref{fig::wayback_images}, we display an example of a failed render, as well as two different timesteps which demonstrate visually the value of the SSIM metric.
+
+\section{Links}
+
+\section{Conclusion}
+
+\newpage
+\bibliography{bibliography}
+\bibliographystyle{ieeetr}
+\end{document}
