@@ -13,6 +13,7 @@
 \usepackage{caption}
 \usepackage{tikz}
 \usepackage{standalone}
+\usepackage{subfigure}
 \usetikzlibrary{decorations.pathreplacing}
 \usetikzlibrary{arrows}
 \usetikzlibrary{fadings}
@@ -48,6 +49,7 @@
 \vspace{-3mm}
 
 \section{Text}
+\label{sec:text}
 \vspace{-2mm}
 We obtain the text from the homepage at every point in time. Our goal is to compare the text from one time-point to the next and quantify how much the text has changed between these measurements. There are a variety of metrics within the literature, in particular we explore the metrics described by Kwon \textit{et~al.} \cite{kwon2006precise}.
 \vspace{-2mm}
@@ -79,6 +81,7 @@ We calculated the Levenshtein distance between the text of two webpages and norm
 \vspace{-3mm}
 
 \section{Thumbnails}
+\label{sec:images}
 \vspace{-2mm}
 In addition to changes in website text and structure, meaningful change in domain is often reflected by a change in the visual structure of the page. We can generate a website snapshot at a recorded point in time using the Wayback Machine (\texttt{www.archive.org/web}) which is a digital archive of the web. Hence, a promising approach to quantify the change in a web domain, is found in applying image analysis techniques to detect the similarity between domain thumbnails \cite{alsum2014thumbnail}. This has previously been considered for pairs of images, although plotting similarity over time has yet to be considered. Several methods for comparing thumbnails have been proposed and implemented previously \cite{henzinger,broder,manku}, and an accessible summary is provided in \cite{alsum2014thumbnail}. Some image comparison techniques may not always produce meaningful results -- e.g., images on a homepage may change frequently, with no change in website content.
 
@@ -97,6 +100,7 @@ We wrote code in \texttt{python} to automatically generate thumbnails from a cho
 \vspace{-3mm}
 
 \section{Hyperlinks}
+\label{sec:links}
 \vspace{-2mm}
  There are two ways in which we use the hyperlinks of a web domain to quantify the change between the domain at from different crawls.
  The first of which is to compare the hyperlinks from the domain to pages of external domains.
@@ -111,10 +115,23 @@ We wrote code in \texttt{python} to automatically generate thumbnails from a cho
  Unfortunately, at the time of writing, we do not have sufficient webpage data to perform this analysis on the data from the NDP domain data, however, we hope to be able to continue this work once the data is able to be obtained.
 \vspace{-3mm}
 
+\section{Results}
+
+Results for all metrics considered in this report are plotted in Figure \ref{fig:results} for data obtained from \texttt{www.ndp.ca}. Figure \ref{fig:text} displays the four text metrics described in Section \ref{sec:text}, and we see that all metrics follow a similar pattern of peaks and troughs with the exception of the Byte-wise metric, which, as explain in Section \ref{sec:text} only takes values of $0$ (no change has occurred) or $1$ (some change has occurred). The image comparison, using the SSIM metric described in Section \ref{sec:images} (scaled to lie between $0$ and $1$) is plotted in Figure \ref{fig:image}. The section of missing data corresponds to a time interval when the wayback archive failed to generate a representative thumbnail (see Section Figure \ref{fig::wayback_images}). The link comparison is shown in Figure \ref{sec:links}. We see a single significant peak around 3000 days, but as mentioned in Section \ref{sec:links} we only had data for a small time period, so it remains to explore this metric in more detail once a larger data set has been obtained. Finally, in Figure \ref{fig:all}, we plot the three different approaches to quantifying domain change (using word distance as a representative measure for change in text). We see, that although the scale of the produced metric varies, the general pattern appears to be consistent. This is reassuring that all metrics appear to agree (at least qualitatively) on locations of significant change. It is worth while to note, that the data we used was not collected at fixed time intervals. Therefore, the high frequency of peaks observed between 4000 and 5000 days in Figures \ref{fig:text} and \ref{fig:image} can be attributed to the larger frequency in data collection. Additionally, due to the non-uniform time steps between data points, peak magnitude is not a reliable metric of change magnitude; i.e., assuming website change can occur gradually, for data collected at smaller intervals, we expect peak magnitudes to be smaller but more frequent, summing to a total larger change over the full interval. 
+
+\begin{figure}
+\centering     %%% not \center
+\subfigure[Results of the four text comparison metrics.]{\label{fig:text}\includegraphics[width=70mm]{report-images/text_results}}
+\subfigure[Results of the image comparison (the missing data corresponds to wayback rendering fails).]{\label{fig:image}\includegraphics[width=70mm]{report-images/image_results}}
+\subfigure[Results of the link comparison (plotted for the period where we had data available).]{\label{fig:links}\includegraphics[width=70mm]{report-images/link_results}}
+\subfigure[Results from text comparison, link comparison, and image comparison on the same axis. Text metric used in this plot is word distance.]{\label{fig:all}\includegraphics[width=70mm]{report-images/all_results_comparison}}
+\caption{Preliminary results using data generated from \texttt{www.ndp.ca}. The dashed black lines correspond to the two days during this period when the NDP leadership changed.}
+\label{fig:results}
+\end{figure}
+
 \section{Conclusion}
 \vspace{-2mm}
-This report outlines some preliminary findings that set the foundation to quantify change of websites over time through the analysis of text, links and thumbnails. We have determined that different metrics are useful when analysing different websites, or when trying to detect different types of change. For example, news websites update their text content every day but this might not indicate significant change, thus a structural metric is more informative than a text metric. On the other hand, governmental websites depend sensitively on text and content, therefore text metrics are useful in determining relevant changes, for example, policies. From the graph plotting the change metrics with time, Figure \ref{fig:plots}, we see that the text and thumbnail metrics align for certain substantial changes which correspond to the change in party leader. This implies some consistency between the metrics and suggests that with further work and added sophistication, our metrics could be used to successfully indicate significant changes in web domains over time.
-
+This report outlines some preliminary findings obtained via exploring the quantification of website domain change over time through the analysis of text, link, and thumbnail change. We may extrapolate that these different metrics could be useful when analysing different websites, or when trying to detect different types of change. For example, news websites update their text content every day, so any metric reliant solely on text may be over-sensitive. On the other hand, governmental websites may only update their text at times of relevant policy or leadership changes. The results in Figure \ref{fig:all} demonstrate, for the data analysed in this report (\texttt{www.ndp.ca}), that the metrics agree qualitatively on the locations of large and small change. This implies some consistency between the metrics and suggests that with further work and added sophistication, our metrics could be used to successfully indicate significant changes in web domains over time. An extension to this work could include combining the three different metrics in a weighted sum, where the weightings for each metric could be chosen, based on the content being analysed.
 
 \bibliography{bibliography}
 \bibliographystyle{ieeetr}
