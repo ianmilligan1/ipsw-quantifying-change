@@ -16,62 +16,70 @@
 \usetikzlibrary{decorations.pathreplacing}
 \usetikzlibrary{arrows}
 \usetikzlibrary{fadings}
-\usepackage{parskip}
+%\usepackage{parskip}
 \usepackage{import}
-\setlength{\parindent}{0pt}
+%\setlength{\parindent}{0pt}
 
 
 \begin{document}
 
 \title{IPSW - Modelling Change of Website Archives}
-\author{Group 4}
+\author{\vspace{-5ex}}
 \date{\vspace{-5ex}}
 \maketitle
 
-\section{Introduction}
+\vspace{-12mm}
 
-\subsection{Goal}
-Our goal is to investigate a novel metric for domain change that focuses on three branches of indicators, namely, changes in webpage text, changes in the links extending from the webpage and change to the homepage thumbnails. We propose that the  magnitude  of the total change in the domain from time-step $n-1$ to time-step $n$ can be modelled as 
-\begin{equation}
-\sigma(n) = \left(1-\frac{\Delta\, \,\text{links}}{\Sigma\,\,\text{links}}\right)w_1 + (\text{change in text})w_2 + (\text{change in content management server})w_3,
-\end{equation}
-where $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, text changes, and CMS changes, respectively.
+\section{Problem and Aims}
 
-\section{Obtaining the data}
-\subsection{Political party data}
-\subsection{Pan Am Games 2015}
+\vspace{-2mm}
+
+ Web archives are past versions of domains, consisting of all the webpages with the same IP address (www.\underline{ }\underline{ }\underline{ }\underline{ }\underline{ }\underline{ }.com), which are saved on large databases around the world to keep records on this vast but rapidly changing source of information.
+ To keep these records, the website must be `crawled' to obtain all the information of a website on a particular date.
+ The scale of all this data is overwhelming for researchers to be able to extract the relevant data from the large number of crawls.
+ Being able to find where large changes occurred in websites so the crawls performed on these dates can be investigated further would be of significant use for historians.
+ Furthermore, the libraries which crawl the websites and store the archives have a data `allowance' which each crawl uses.
+ Therefore, being able to detect when a large change has occurred before crawling the whole domain or even being able to predict when a large change will occur next is hugely valuable.
+ 
+ We find (from existing literature, for example \cite{dhyani2002survey}) or derive different metrics for quantifying change between websites.
+ We then apply these metrics to a web domain crawled from several different dates, comparing two consecutive crawls.
+ This allows us to produce a time series of how much the website has changed from the previous crawl against the time of the new crawl.
+ We then compare the different metrics against each other, and attempt to identify large changes of the organisation behind the website which we know occurred in the past.
+\vspace{-3mm}
 
 \section{Text}
-We obtain the text from the homepage at every point in time. Our goal is to compare the text from one time-point to the next and quantify how much the text has changed between these measurements. There are a variety of metrics within the literature, in particular we explore the metrics described by Kwon et~al.  \cite{kwon2006precise}.
+\vspace{-2mm}
+We obtain the text from the homepage at every point in time. Our goal is to compare the text from one time-point to the next and quantify how much the text has changed between these measurements. There are a variety of metrics within the literature, in particular we explore the metrics described by Kwon \textit{et~al.} \cite{kwon2006precise}.
+\vspace{-2mm}
 \subsection{Metrics}
+\vspace{-2mm}
 \textit{\textbf{Byte-wise comparison metric}}:
 Compares two webpages sequentially character by character. The metric then returns 1 if any change has occurred and zero otherwise \cite{brewington2000dynamic, cho1999evolution,kim2005empirical}. This means that it returns 1 for even the most trivial of changes, for example, adding a blank space. This metric is thereby over-sensitive and does not provide particularly meaningful insight into the change between two strings of text. However, the byte-wise metric is useful in limiting the pages of interest, namely, if at any time-step the metric is 0, we know that there have been absolutely no changes at all and hence we need not explore these events further.
+\vspace{1.5mm}
 
-\textit{\textbf{TF.IDF cosine distance}}:
+\noindent \textit{\textbf{TF.IDF cosine distance}}:
 TF.IDF is shorthand for term frequency-inverse document frequency and is used to quantify how important a word is to a document of text. The underlying concept is that relevant words are not necessarily the most frequent words, for example, if considering book reviews, the words ``character'' or ``plot'' might appear very frequently, but do not give valuable insight to summarise the review. 
-
-This metric is calculated by finding the TF (term frequency) of a word, namely the frequency of a word in a document. We also find the IDF (inverse document frequency) of a word, which is the measure of how significant that term is in the collection of documents. By combining these concepts, we obtain TF.IDF weighted vectors to represent the content of each document and the metric value is calculated as the cosine distance between them \cite{salton1986introduction}. 
-
+This metric is calculated by finding the TF (term frequency) of a word, namely the frequency of a word in a document. We also find the IDF (inverse document frequency) of a word, which is the measure of how significant that term is in the collection of documents. By combining these concepts, we obtain TF.IDF weighted vectors to represent the content of each document and the metric value is calculated as the cosine distance between them \cite{salton1986introduction}.
 TF.IDF has evident success in search engine algorithms to shift the definition of word-value from frequency to relevance \cite{beel2016paper}.
 
 %\begin{equation}
 %D_{\cos} = 1-\frac{\boldsymbol{p}\cdot \boldsymbol{p}'}{||\boldsymbol{p}||_2||\boldsymbol{p}'||_2}.
 %\end{equation}
-\textit{\textbf{Word distance}}:
-The word distance metric calculates how many of the words in a document have changed \cite{ntoulas2004s}. This is done by counting the number of common words in each document and normalising with respect to the total number of words in the two documents. 
-%\begin{equation}
-
+\vspace{1.5mm}
+\noindent \textit{\textbf{Word distance}}:
+The word distance metric calculates how many of the words in a document have changed \cite{ntoulas2004s}. This is done by counting the number of common words in each document and normalising with respect to the total number of words in the two documents.
 Although less sensitive than byte-wise, both TF.IDF and the word distance metric are unable to account for change in word order. 
 %	D_{WD} = 1- \frac{2\cdot\vert\text{common words}\vert}{m+n},
 %\end{equation}
 
-\textit{\textbf{Levenshtein distance}}:
+\vspace{1.5mm}
+\noindent \textit{\textbf{Levenshtein distance}}:\\
 The Levenshtein distance between two strings is the minimum number of single character edits, (in other words substitutions, insertions or deletions) required to transform one string into the other \cite{levenshtein1996}. For example, the Levenshtein distance between ``test'' and ``tent'' is 1, due to the single substitution of ``s'' to ``n''.
-
 We calculated the Levenshtein distance between the text of two webpages and normalised this value according to the maximum Levenshtein distance, namely the length of the longer string. 
+\vspace{-3mm}
 
 \section{Thumbnails}
-
+\vspace{-2mm}
 In addition to changes in website text and structure, meaningful change in domain is often reflected by a change in the visual structure of the page. We can generate a website snapshot at a recorded point in time using the Wayback Machine (\texttt{www.archive.org/web}) which is a digital archive of the web. Hence, a promising approach to quantify the change in a web domain, is found in applying image analysis techniques to detect the similarity between domain thumbnails \cite{alsum2014thumbnail}. This has previously been considered for pairs of images, although plotting similarity over time has yet to be considered. Several methods for comparing thumbnails have been proposed and implemented previously \cite{henzinger,broder,manku}, and an accessible summary is provided in \cite{alsum2014thumbnail}. Some image comparison techniques may not always produce meaningful results -- e.g., images on a homepage may change frequently, with no change in website content.
 
 Therefore, we propose the use of the structural similarity index (SSIM) \cite{ssim}, which, broadly speaking, measures the similarity between two images by comparing average pixel intensity in various sub-windows of the page. The SSIM value is generally between $-1$ and $1$, with $1$ only achieved when two images are identical. In order to compare this metric directly with the differences calculated between text and website links, we scale the SSIM value to lie between $0$ and $1$, where $0$ indicates no change between a pair of images. We call this metric, $d$, a measure of difference between image thumbnails.
@@ -86,10 +94,26 @@ Therefore, we propose the use of the structural similarity index (SSIM) \cite{ss
 \end{figure}
 
 We wrote code in \texttt{python} to automatically generate thumbnails from a chosen web domain at all points recorded in the Wayback Machine, and used this to obtain a library of 108 thumbnails from \texttt{www.ndp.ca} from 2005-2019. There were times when the Wayback Archive had only saved a page that had failed to render, which presented itself as a primarily white webpage. We detected these `fails' and removed them from the data set, by imposing a maximum percentage of white pixels (80\%). In Figure \ref{fig::wayback_images}, we display an example of a failed render, as well as two different timesteps which demonstrate visually the value of the SSIM metric.
+\vspace{-3mm}
 
-\section{Links}
+\section{Hyperlinks}
+\vspace{-2mm}
+ There are two ways in which we use the hyperlinks of a web domain to quantify the change between the domain at from different crawls.
+ The first of which is to compare the hyperlinks from the domain to pages of external domains.
+ For simplicity, we only consider hyperlinks on the homepage of the domain pointing to webpages of external domains and we do not consider the frequency of each hyperlink, only whether the hyperlink exists or not.
+ Our method for quantifying the change in external hyperlinks is similar to that of the word distance method.
+ We divide the total number of links that are present in the two different crawls of the domain and normalise this by the average number of hyperlinks on the homepage of the domain from both crawls.
+ 
+ The second method we use is to represent the webpages in a domain as nodes in a network which are connected by directed edges representing hyperlinks from one webpage to another.
+ This network representing the structure of a domain may change from one crawl to the next, when webpages are added and removed from a domain between two crawls or when hyperlinks within a domain change.
+ Several global metrics to quantify the change between these networks have been proposed, including compactness and stratum, which are explained in detail by Botafogo \textit{et al.} in \cite{botafogo1992structural}.
+ Depending on the structural changes that are to be detected or expected from the domain, these different metrics can be more or less useful.
+ Unfortunately, at the time of writing, we do not have sufficient webpage data to perform this analysis on the data from the NDP domain data, however, we hope to be able to continue this work once the data is able to be obtained.
+\vspace{-3mm}
 
 \section{Conclusion}
+\vspace{-2mm}
+
 
 \bibliography{bibliography}
 \bibliographystyle{ieeetr}
