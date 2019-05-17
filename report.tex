@@ -19,6 +19,7 @@
 \usepackage{parskip}
 \setlength{\parindent}{0pt}
 
+
 \begin{document}
 
 \title{IPSW - Modelling Change of Website Archives}
@@ -42,28 +43,33 @@ where $w_1$, $w_2$, and $w_3$ weight the relevant contributions of URL changes, 
 \section{Text}
 We obtain the text from the homepage at every point in time. Our goal is to compare the text from one time-point to the next and quantify how much the text has changed between these measurements. There are a variety of metrics within the literature, in particular we explore the metrics described by Kwon et~al.  \cite{kwon2006precise}.
 \subsection{Metrics}
-\subsubsection*{Byte-wise comparison metric}
-Compares two webpages sequentially character by character. The metric returns 0 when no change and 1 otherwise. It returns 1 for even trivial cases, for example, blank space -- over-sensitive.
+\textit{\textbf{Byte-wise comparison metric}}:
+Compares two webpages sequentially character by character. The metric then returns 1 if any change has occurred and zero otherwise \cite{brewington2000dynamic, cho1999evolution,kim2005empirical}. This means that it returns 1 for even the most trivial of changes, for example, adding a blank space. This metric is thereby over-sensitive and does not provide particularly meaningful insight into the change between two strings of text. However, the byte-wise metric is useful in limiting the pages of interest, namely, if at any time-step the metric is 0, we know that there have been absolutely no changes at all and hence we need not explore these events further.
 
-\subsubsection*{TF.IDF cosine distance}
-Comparing the number of times key words appear in the document.
+\textit{\textbf{TF.IDF cosine distance}}:
+TF.IDF is shorthand for term frequency-inverse document frequency and is used to quantify how important a word is to a document of text. The underlying concept is that relevant words are not necessarily the most frequent words, for example, if considering book reviews, the words ``character'' or ``plot'' might appear very frequently, but do not give valuable insight to summarise the review. 
 
-\subsubsection*{Word distance}
-Percentage of words that have stayed the same.
+This metric is calculated by finding the TF (term frequency) of a word, namely the frequency of a word in a document. We also find the IDF (inverse document frequency) of a word, which is the measure of how significant that term is in the collection of documents. By combining these concepts, we obtain TF.IDF weighted vectors to represent the content of each document and the metric value is calculated as the cosine distance between them \cite{salton1986introduction}. 
 
-\subsubsection*{Edit distance}
-Number of edits that are required to transform one sentence into another.
+TF.IDF has evident success in search engine algorithms to shift the definition of word-value from frequency to relevance \cite{beel2016paper}.
 
-\subsubsection*{Shingling metric}
-Breaks up the webpage into subsequences called ``shingles'' that contain $k$ words.
+%\begin{equation}
+%D_{\cos} = 1-\frac{\boldsymbol{p}\cdot \boldsymbol{p}'}{||\boldsymbol{p}||_2||\boldsymbol{p}'||_2}.
+%\end{equation}
+\textit{\textbf{Word distance}}:
+The word distance metric calculates how many of the words in a document have changed \cite{ntoulas2004s}. This is done by counting the number of common words in each document and normalising with respect to the total number of words in the two documents. 
+%\begin{equation}
 
-\subsection{Issues}
-\begin{itemize}
-	\item Byte-wise is over-sensitive,
-	\item TF.IDF and Word Distance cannot take into account change in word order,
-	\item Shingling is over-sensitive to small webpages,
-	
-\end{itemize}
+Although less sensitive than byte-wise, both TF.IDF and the word distance metric are unable to account for change in word order. 
+%	D_{WD} = 1- \frac{2\cdot\vert\text{common words}\vert}{m+n},
+%\end{equation}
+
+\textit{\textbf{Levenshtein distance}}:
+The Levenshtein distance between two strings is the minimum number of single character edits, (in other words substitutions, insertions or deletions) required to transform one string into the other \cite{levenshtein1996}. For example, the Levenshtein distance between ``test'' and ``tent'' is 1, due to the single substitution of ``s'' to ``n''.
+
+We calculated the Levenshtein distance between the text of two webpages and normalised this value according to the maximum Levenshtein distance, namely the length of the longer string. 
+
+
 
 
 \section{Thumbnails}
