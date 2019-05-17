@@ -6,12 +6,12 @@ set(groot,'defaultAxesTickLabelInterpreter','latex'); set(groot, 'defaultLegendI
 
 text_comparison = csvread('text_metrics.csv');
 image_comparison = csvread('thumbnail_metrics.csv');
-link_comparison = csvread('link_measure.csv');
+link_comparison = csvread('Plot_data/link_measure.csv');
 
 %% Plot image comparison
 
 image_dates = image_comparison(:,1);
-s = image_comparison(:,2)/max(image_comparison(:,2));
+s = image_comparison(:,2);
 for i = 1:length(s)
     if s(i) == -10
         s(i) = nan;
@@ -38,7 +38,7 @@ for i = 1:length(image_dates)
     num_days(i) = daysact(base_date,curr_date);
 end
 
-plot(num_days,s,'k-','MarkerSize',10,'Linewidth',2);
+plot(num_days,s,'MarkerSize',10,'Linewidth',2);
 grid on
 xlabel('Days','fontsize',14);
 ylabel('Change','fontsize',14);
@@ -51,7 +51,7 @@ hold on
 important_dates = ['11/28/05';'01/23/06';'10/14/08';'05/02/11';'08/22/11';'03/24/12';'10/19/15';'04/10/16';'10/01/17'];
 num_days_important = daysact(base_date,important_dates);
 for i = [6,length(num_days_important)]
-    plot([num_days_important(i) num_days_important(i)],[0 1],'r--','Linewidth',3);
+    plot([num_days_important(i) num_days_important(i)],[0 1],'k--','Linewidth',3);
 end
 
 %% Plot text comparison
@@ -87,7 +87,7 @@ grid on
 xlabel('Days','fontsize',14);
 ylabel('Change','fontsize',14);
 ylim([0 1]);
-legend('Byte-wise','TF.IDF','Edit distance','Word distance');
+legend('Byte-wise','TF.IDF','Lebenshtein','Word distance');
 set(legend,'fontsize',12);
 title('Text comparison','fontsize',18);
 set(gca,'fontsize',14);
@@ -97,7 +97,7 @@ set(legend,'location','northwest');
 important_dates = ['11/28/05';'01/23/06';'10/14/08';'05/02/11';'08/22/11';'03/24/12';'10/19/15';'04/10/16';'10/01/17'];
 num_days_important = daysact(base_date,important_dates);
 for i = [6,length(num_days_important)]
-    plot([num_days_important(i) num_days_important(i)],[0 1],'r--','Linewidth',3);
+    plot([num_days_important(i) num_days_important(i)],[0 1],'k--','Linewidth',3);
 end
 
 %% Plot links comparison
@@ -125,7 +125,7 @@ end
 figure(3)
 last_date = '08/07/2018';
 days_to_last_date = daysact(base_date,last_date);
-plot(num_days,link_comparison(:,2),'k-','MarkerSize',10,'Linewidth',2);
+plot(num_days,link_comparison(:,2),'MarkerSize',10,'Linewidth',2);
 grid on
 xlabel('Days','fontsize',14);
 ylabel('Change','fontsize',14);
@@ -139,5 +139,5 @@ hold on
 important_dates = ['11/28/05';'01/23/06';'10/14/08';'05/02/11';'08/22/11';'03/24/12';'10/19/15';'04/10/16';'10/01/17'];
 num_days_important = daysact(base_date,important_dates);
 for i = [6,length(num_days_important)]
-    plot([num_days_important(i) num_days_important(i)],[0 1],'r--','Linewidth',3);
+    plot([num_days_important(i) num_days_important(i)],[0 1],'k--','Linewidth',3);
 end
